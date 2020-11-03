@@ -1,0 +1,62 @@
+.progress {
+  background: linear-gradient(to right, #0000 50%, #111 50%);
+  background-size: 200% 100%;
+  transition: background-position 0.2s ease-in-out;
+}
+
+.gradient {
+  background: linear-gradient(to right, #ff4136 0%, #19a974 100%);
+}
+
+.cursor {
+  cursor: default;
+}
+
+.sel {
+  user-select: text;
+}
+
+.sel-none {
+  user-select: none;
+}
+
+.pe {
+  pointer-events: all;
+}
+
+.pe-none {
+  pointer-events: none;
+}
+
+.w6 {
+  width: 32rem;
+}
+
+.mw-90 {
+  max-width: 90%;
+}
+
+.bg-teams {
+  background-color: #201f1f;
+}
+
+/* not small */
+@media screen and (min-width: 30em) {
+  .w6-ns {
+    width: 32rem;
+  }
+}
+
+/* medium */
+@media screen and (min-width: 30em) and (max-width: 60em) {
+  .w6-m {
+    width: 32rem;
+  }
+}
+
+/* large */
+@media screen and (min-width: 60em) {
+  .w6-l {
+    width: 32rem;
+  }
+}
