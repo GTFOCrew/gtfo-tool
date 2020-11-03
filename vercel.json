@@ -1,0 +1,8 @@
+{
+  "version": 2,
+  "name": "gtfo-tool",
+  "alias": "gtfo-tool",
+  "scope": "gtfo-crew",
+  "trailingSlash": false,
+  "regions": ["bru1", "cdg1", "dub1"]
+}
