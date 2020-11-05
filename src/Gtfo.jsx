@@ -33,6 +33,7 @@ const styles = {
 const Gtfo = () => {
   const [dayPercent, setDayPercent] = useState(() => getDayProgress())
   const [weekPercent, setWeekPercent] = useState(() => getWeekProgress())
+  const [[next15, last15], setMoneyPercent] = useState(() => getMoneyProgress())
 
   useEffect(() => {
     const dayTimer = setInterval(() => setDayPercent(getDayProgress()), 1000)
@@ -40,19 +41,22 @@ const Gtfo = () => {
       () => setWeekPercent(getWeekProgress()),
       10000,
     )
+    const moneyTimer = setInterval(
+      () => setMoneyPercent(getMoneyProgress()),
+      60000,
+    )
 
     return () => {
       clearInterval(dayTimer)
       clearInterval(weekTimer)
+      clearInterval(moneyTimer)
     }
   }, [])
-
-  const [[next15, last15]] = useState(() => getMoneyProgress())
 
   return (
     <section className={styles.app}>
       <header className={styles.header}>
-        <a className={styles.title} href="https://gtfo-tool.now.sh/">
+        <a className={styles.title} href="https://gtfo-tool.vercel.app/">
           :: gtfo tool ::
         </a>
       </header>
