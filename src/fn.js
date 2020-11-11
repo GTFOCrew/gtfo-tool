@@ -42,8 +42,9 @@ export const getMoneyProgress = () => {
   })
 
   if (next.weekday >= 6) {
-    dollarDay -= 1
-    next = next.plus({ day: -1 })
+    const daysToGoBack = next.weekday - 5
+    dollarDay -= next.weekday - 5
+    next = next.plus({ day: -daysToGoBack })
   }
 
   if (now.day < dollarDay) {
