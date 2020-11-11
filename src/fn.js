@@ -6,7 +6,7 @@ const START = 9 * 60
 const END = 17 * 60
 const DAY = END - START
 const WEEK = DAY * 5
-const DOLLAR = 15
+const DOLLAR = 14
 
 const clamp = (n, min, max) => (n < min ? min : n > max ? max : n)
 
@@ -19,7 +19,7 @@ const minutesToday = () => {
 
 // exported //
 
-export const format = n => parseFloat(n.toFixed(2))
+export const format = (n) => parseFloat(n.toFixed(2))
 
 export const getDayProgress = () => format((minutesToday() / DAY) * 100)
 
@@ -32,6 +32,7 @@ export const getWeekProgress = () =>
 
 export const getMoneyProgress = () => {
   const now = londonNow()
+  let dollarDay = DOLLAR
   let next = DateTime.fromObject({
     day: DOLLAR,
     hour: 0,
@@ -40,11 +41,16 @@ export const getMoneyProgress = () => {
     zone: 'Europe/London',
   })
 
-  if (now.day < DOLLAR) {
+  if (next.weekday >= 6) {
+    dollarDay -= 1
+    next = next.plus({ day: -1 })
+  }
+
+  if (now.day < dollarDay) {
     return [next, next.minus({ month: 1 })]
   }
 
   return [next.plus({ month: 1 }), next]
 }
 
-export const getProgressCSS = percent => `${clamp(100 - percent, 0, 100)}%`
+export const getProgressCSS = (percent) => `${clamp(100 - percent, 0, 100)}%`
