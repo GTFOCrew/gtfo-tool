@@ -39,7 +39,7 @@ const Progress = ({ label, percent, from, to, underMsg, overMsg }) => {
       return format((100 * diff1.valueOf()) / diff2.valueOf())
     }
 
-    return percent
+    return format(percent)
   }, [percent, to, from])
 
   const message =
