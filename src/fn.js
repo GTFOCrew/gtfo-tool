@@ -17,6 +17,25 @@ const minutesToday = () => {
   return now.hour * 60 + now.minute - START
 }
 
+const getPayDayForMonth = (date) => {
+  let payDay = DateTime.fromObject(
+    {
+      day: DOLLAR,
+      hour: 0,
+      minute: 0,
+      second: 0,
+
+      month: date.month,
+      year: date.year,
+    },
+    {
+      zone: 'Europe/London',
+    },
+  )
+
+  return payDay.minus({ days: Math.max(0, payDay.weekday - 5) })
+}
+
 // exported //
 
 export const format = (n) => parseFloat(n.toFixed(2))
@@ -32,30 +51,15 @@ export const getWeekProgress = () =>
 
 export const getMoneyProgress = () => {
   const now = londonNow()
-  let dollarDay = DOLLAR
-  let next = DateTime.fromObject(
-    {
-      day: DOLLAR,
-      hour: 0,
-      minute: 0,
-      second: 0,
-    },
-    {
-      zone: 'Europe/London',
-    },
-  )
+  const current = getPayDayForMonth(now)
 
-  if (next.weekday >= 6) {
-    const daysToGoBack = next.weekday - 5
-    dollarDay -= next.weekday - 5
-    next = next.plus({ day: -daysToGoBack })
+  if (now.day > current.day) {
+    const next = getPayDayForMonth(now.plus({ month: 1 }))
+    return [next, current.plus({ day: 1 })]
   }
 
-  if (now.day > dollarDay) {
-    next = next.plus({ month: 1 })
-  }
-
-  return [next, next.minus({ month: 1 })]
+  const prev = getPayDayForMonth(now.minus({ month: 1 }))
+  return [current, prev]
 }
 
 export const getProgressCSS = (percent) => `${clamp(100 - percent, 0, 100)}%`
