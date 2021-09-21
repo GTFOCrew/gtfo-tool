@@ -33,13 +33,17 @@ export const getWeekProgress = () =>
 export const getMoneyProgress = () => {
   const now = londonNow()
   let dollarDay = DOLLAR
-  let next = DateTime.fromObject({
-    day: DOLLAR,
-    hour: 0,
-    minute: 0,
-    second: 0,
-    zone: 'Europe/London',
-  })
+  let next = DateTime.fromObject(
+    {
+      day: DOLLAR,
+      hour: 0,
+      minute: 0,
+      second: 0,
+    },
+    {
+      zone: 'Europe/London',
+    },
+  )
 
   if (next.weekday >= 6) {
     const daysToGoBack = next.weekday - 5
@@ -47,11 +51,11 @@ export const getMoneyProgress = () => {
     next = next.plus({ day: -daysToGoBack })
   }
 
-  if (now.day < dollarDay) {
-    return [next, next.minus({ month: 1 })]
+  if (now.day > dollarDay) {
+    next = next.plus({ month: 1 })
   }
 
-  return [next.plus({ month: 1 }), next]
+  return [next, next.minus({ month: 1 })]
 }
 
 export const getProgressCSS = (percent) => `${clamp(100 - percent, 0, 100)}%`
