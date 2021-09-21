@@ -14,7 +14,7 @@ export const londonNow = () => DateTime.local().setZone('Europe/London')
 
 const minutesToday = () => {
   const now = londonNow()
-  return now.hour * 60 + now.minute - START
+  return now.hour * 60 + now.minute - START + now.second / 60
 }
 
 const getPayDayForMonth = (date) => {
