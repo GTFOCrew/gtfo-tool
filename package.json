@@ -1,7 +1,8 @@
 {
   "name": "gtfo-tool",
   "version": "1.0.0",
-  "description": null,
+  "description": "the origins",
+  "license": "MIT",
   "keywords": [
     "tachyons",
     "react"
