@@ -62,4 +62,27 @@ export const getMoneyProgress = () => {
   return [current, prev]
 }
 
+const magicMonths = [1, 4, 7, 10]
+export const getMagicProgress = () => {
+  const now = londonNow()
+  let nowAltered
+  const nextMonth = magicMonths.find((m) => now.month <= m)
+  if (nextMonth == null) {
+    nowAltered = now
+      .plus({ year: 1 })
+      .set({ month: magicMonths[0], day: DOLLAR })
+  } else {
+    nowAltered = now.set({ month: nextMonth, day: DOLLAR })
+  }
+  const current = getPayDayForMonth(nowAltered)
+
+  if (now.month === current.month && now.day > current.day + 2) {
+    const next = getPayDayForMonth(nowAltered.plus({ months: 3 }))
+    return [next, current.plus({ day: 3 })]
+  }
+
+  const prev = getPayDayForMonth(nowAltered.minus({ month: 3 }))
+  return [current, prev]
+}
+
 export const getProgressCSS = (percent) => `${clamp(100 - percent, 0, 100)}%`

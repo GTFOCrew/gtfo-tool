@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { getDayProgress, getWeekProgress, getMoneyProgress } from './fn'
+import {
+  getDayProgress,
+  getWeekProgress,
+  getMoneyProgress,
+  getMagicProgress,
+} from './fn'
 import Progress from './Progress'
 
 const styles = {
@@ -34,6 +39,9 @@ const Gtfo = () => {
   const [dayPercent, setDayPercent] = useState(() => getDayProgress())
   const [weekPercent, setWeekPercent] = useState(() => getWeekProgress())
   const [[next15, last15], setMoneyPercent] = useState(() => getMoneyProgress())
+  const [[nextMagic, lastMagic], setMagicRechargePercent] = useState(() =>
+    getMagicProgress(),
+  )
 
   useEffect(() => {
     const dayTimer = setInterval(() => setDayPercent(getDayProgress()), 1000)
@@ -45,11 +53,16 @@ const Gtfo = () => {
       () => setMoneyPercent(getMoneyProgress()),
       60000,
     )
+    const magicTimer = setInterval(
+      () => setMagicRechargePercent(getMagicProgress()),
+      60000,
+    )
 
     return () => {
       clearInterval(dayTimer)
       clearInterval(weekTimer)
       clearInterval(moneyTimer)
+      clearInterval(magicTimer)
     }
   }, [])
 
@@ -86,6 +99,16 @@ const Gtfo = () => {
           to={next15}
           underMsg="pauper's lament... 📉"
           overMsg="gimme money ! 📈"
+        />
+      </div>
+
+      <div className={styles.container}>
+        <Progress
+          label="🌯🥐🥓"
+          from={lastMagic}
+          to={nextMagic}
+          underMsg=""
+          overMsg="burn that card 🔥"
         />
       </div>
     </section>
