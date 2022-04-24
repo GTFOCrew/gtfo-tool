@@ -3,10 +3,7 @@
   "version": "1.0.0",
   "description": "the origins",
   "license": "MIT",
-  "keywords": [
-    "tachyons",
-    "react"
-  ],
+  "keywords": ["tachyons", "react"],
   "main": "src/index.js",
   "dependencies": {
     "lodash-es": "4.17.21",
@@ -24,10 +21,8 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "browserslist": [
-    ">1%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "browserslist": [">1%", "not dead", "not ie <= 11", "not op_mini all"],
+  "engines": {
+    "node": ">=14.0.0"
+  }
 }
