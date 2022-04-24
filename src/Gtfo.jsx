@@ -6,6 +6,8 @@ import {
   getMagicProgress,
 } from './fn'
 import Progress from './Progress'
+import SettingsButton from './SettingsButton'
+import useSettings from './store'
 
 const styles = {
   app: `
@@ -35,26 +37,46 @@ const styles = {
   `,
 }
 
+const WORKING_HOURS_KEY = 'workingHours'
+const DEFAULT_WORKING_HOURS = { start: 9, end: 17 }
+
 const Gtfo = () => {
-  const [dayPercent, setDayPercent] = useState(() => getDayProgress())
-  const [weekPercent, setWeekPercent] = useState(() => getWeekProgress())
-  const [[next15, last15], setMoneyPercent] = useState(() => getMoneyProgress())
+  const settings = useSettings()
+  const workingHours = settings[WORKING_HOURS_KEY] || DEFAULT_WORKING_HOURS
+  const [dayPercent, setDayPercent] = useState(() =>
+    getDayProgress(workingHours),
+  )
+  const [weekPercent, setWeekPercent] = useState(() =>
+    getWeekProgress(workingHours),
+  )
+  const [[next15, last15], setMoneyPercent] = useState(() =>
+    getMoneyProgress(workingHours),
+  )
   const [[nextMagic, lastMagic], setMagicRechargePercent] = useState(() =>
-    getMagicProgress(),
+    getMagicProgress(workingHours),
   )
 
   useEffect(() => {
-    const dayTimer = setInterval(() => setDayPercent(getDayProgress()), 1000)
+    if (!settings.has(WORKING_HOURS_KEY)) {
+      settings.set(WORKING_HOURS_KEY, DEFAULT_WORKING_HOURS)
+    }
+  }, [settings])
+
+  useEffect(() => {
+    const dayTimer = setInterval(
+      () => setDayPercent(getDayProgress(workingHours)),
+      1000,
+    )
     const weekTimer = setInterval(
-      () => setWeekPercent(getWeekProgress()),
+      () => setWeekPercent(getWeekProgress(workingHours)),
       10000,
     )
     const moneyTimer = setInterval(
-      () => setMoneyPercent(getMoneyProgress()),
+      () => setMoneyPercent(getMoneyProgress(workingHours)),
       60000,
     )
     const magicTimer = setInterval(
-      () => setMagicRechargePercent(getMagicProgress()),
+      () => setMagicRechargePercent(getMagicProgress(workingHours)),
       60000,
     )
 
@@ -64,7 +86,7 @@ const Gtfo = () => {
       clearInterval(moneyTimer)
       clearInterval(magicTimer)
     }
-  }, [])
+  }, [workingHours])
 
   return (
     <section className={styles.app}>
@@ -111,6 +133,8 @@ const Gtfo = () => {
           overMsg="burn that card 🔥"
         />
       </div>
+
+      <SettingsButton />
     </section>
   )
 }

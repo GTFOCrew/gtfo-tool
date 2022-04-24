@@ -2,19 +2,15 @@
 
 import { DateTime } from 'luxon'
 
-const START = 9 * 60
-const END = 17 * 60
-const DAY = END - START
-const WEEK = DAY * 5
 const DOLLAR = 14
 
 const clamp = (n, min, max) => (n < min ? min : n > max ? max : n)
 
 export const londonNow = () => DateTime.local().setZone('Europe/London')
 
-const minutesToday = () => {
+const minutesToday = ({ start }) => {
   const now = londonNow()
-  return now.hour * 60 + now.minute - START + now.second / 60
+  return now.hour * 60 + now.minute - start * 60 + now.second / 60
 }
 
 const getPayDayForMonth = (date) => {
@@ -40,12 +36,20 @@ const getPayDayForMonth = (date) => {
 
 export const format = (n) => parseFloat(n.toFixed(2))
 
-export const getDayProgress = () => format((minutesToday() / DAY) * 100)
+export const getDay = ({ start, end }) => end * 60 - start * 60
 
-export const getWeekProgress = () =>
+export const getWeek = (workingHours) => getDay(workingHours) * 5
+
+export const getDayProgress = (workingHours) =>
+  londonNow().weekday < 6
+    ? format((minutesToday(workingHours) / getDay(workingHours)) * 100)
+    : 100
+
+export const getWeekProgress = (workingHours) =>
   format(
-    ((DAY * (londonNow().weekday - 1) + clamp(minutesToday(), -1, DAY)) /
-      WEEK) *
+    ((getDay(workingHours) * (londonNow().weekday - 1) +
+      clamp(minutesToday(workingHours), -1, getDay(workingHours))) /
+      getWeek(workingHours)) *
       100,
   )
 

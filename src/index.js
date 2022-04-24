@@ -1,7 +1,12 @@
-import React from 'react'
-import { render } from 'react-dom'
+import React, { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
 import 'tachyons'
 import './styles.css'
 import Gtfo from './Gtfo'
 
-render(<Gtfo />, document.querySelector('#root'))
+const root = createRoot(document.querySelector('#root'))
+root.render(
+  <StrictMode>
+    <Gtfo />
+  </StrictMode>,
+)
