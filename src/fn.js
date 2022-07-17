@@ -90,3 +90,15 @@ export const getMagicProgress = () => {
 }
 
 export const getProgressCSS = (percent) => `${clamp(100 - percent, 0, 100)}%`
+
+export const isEarlyFriday = () => {
+  const now = londonNow()
+  // early friday is in friday
+  return (
+    now.weekday === 5 &&
+    // june, july and august
+    ([6, 7, 8].includes(now.month) ||
+      // but also the first friday of september
+      (now.month === 9 && now.day <= 7))
+  )
+}

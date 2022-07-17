@@ -4,6 +4,7 @@ import {
   getWeekProgress,
   getMoneyProgress,
   getMagicProgress,
+  isEarlyFriday,
 } from './fn'
 import Progress from './Progress'
 import SettingsButton from './SettingsButton'
@@ -38,11 +39,16 @@ const styles = {
 }
 
 const WORKING_HOURS_KEY = 'workingHours'
+const EARLY_FRIDAY_WORKING_HOURS_KEY = 'workingHours.earlyFriday'
 const DEFAULT_WORKING_HOURS = { start: 9, end: 17 }
+const DEFAULT_EARLY_FRIDAY_WORKING_HOURS = { start: 8, end: 13 }
 
 const Gtfo = () => {
   const settings = useSettings()
-  const workingHours = settings[WORKING_HOURS_KEY] || DEFAULT_WORKING_HOURS
+  const workingHours = isEarlyFriday()
+    ? settings.get(EARLY_FRIDAY_WORKING_HOURS_KEY) ||
+      DEFAULT_EARLY_FRIDAY_WORKING_HOURS
+    : settings.get(WORKING_HOURS_KEY) || DEFAULT_WORKING_HOURS
   const [dayPercent, setDayPercent] = useState(() =>
     getDayProgress(workingHours),
   )
@@ -59,6 +65,13 @@ const Gtfo = () => {
   useEffect(() => {
     if (!settings.has(WORKING_HOURS_KEY)) {
       settings.set(WORKING_HOURS_KEY, DEFAULT_WORKING_HOURS)
+    }
+
+    if (!settings.has(EARLY_FRIDAY_WORKING_HOURS_KEY)) {
+      settings.set(
+        EARLY_FRIDAY_WORKING_HOURS_KEY,
+        DEFAULT_EARLY_FRIDAY_WORKING_HOURS,
+      )
     }
   }, [settings])
 

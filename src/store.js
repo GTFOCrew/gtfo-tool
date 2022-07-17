@@ -15,7 +15,7 @@ const readSettings = () => {
 const useSettings = create((update, read) => ({
   ...readSettings(),
 
-  get: (key) => at(read(), key),
+  get: (key) => at(read(), key)[0],
   set: (key, value) =>
     update((settings) => {
       const newSettings = merge({}, settings, set({}, key, value))
