@@ -48,6 +48,22 @@ const SettingsButton = () => {
     (ev) => settings.set('workingHours.end', parseInt(ev.target.value, 10)),
     [settings],
   )
+  const changeWorkingHoursEarlyFridayStart = useCallback(
+    (ev) =>
+      settings.set(
+        'workingHours.earlyFriday.start',
+        parseInt(ev.target.value, 10),
+      ),
+    [settings],
+  )
+  const changeWorkingHoursEarlyFridayEnd = useCallback(
+    (ev) =>
+      settings.set(
+        'workingHours.earlyFriday.end',
+        parseInt(ev.target.value, 10),
+      ),
+    [settings],
+  )
 
   if (showSettings) {
     return (
@@ -78,6 +94,29 @@ const SettingsButton = () => {
             max={17}
             value={settings.workingHours.end}
             onChange={changeWorkingHoursEnd}
+          />
+        </div>
+        <div className={styles.settingsPill}>
+          <span role="img" aria-label="Clock and Wind Icons">
+            🕙💨
+          </span>
+          &nbsp;
+          <input
+            type="number"
+            className={styles.input}
+            min={7}
+            max={9}
+            value={settings.workingHours.earlyFriday.start}
+            onChange={changeWorkingHoursEarlyFridayStart}
+          />
+          -
+          <input
+            type="number"
+            className={styles.input}
+            min={12}
+            max={15}
+            value={settings.workingHours.earlyFriday.end}
+            onChange={changeWorkingHoursEarlyFridayEnd}
           />
         </div>
       </div>

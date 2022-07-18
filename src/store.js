@@ -1,4 +1,4 @@
-import { at, has, merge, omit, set } from 'lodash-es'
+import { get, has, merge, omit, set } from 'lodash-es'
 import create from 'zustand'
 
 const SETTINGS_KEY = 'gtfo:settings'
@@ -15,7 +15,7 @@ const readSettings = () => {
 const useSettings = create((update, read) => ({
   ...readSettings(),
 
-  get: (key) => at(read(), key),
+  get: (key) => get(read(), key),
   set: (key, value) =>
     update((settings) => {
       const newSettings = merge({}, settings, set({}, key, value))
