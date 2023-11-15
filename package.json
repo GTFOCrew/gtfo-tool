@@ -3,26 +3,34 @@
   "version": "1.0.0",
   "description": "the origins",
   "license": "MIT",
-  "keywords": ["tachyons", "react"],
-  "main": "src/index.js",
+  "keywords": [
+    "tachyons",
+    "react"
+  ],
   "dependencies": {
     "lodash-es": "4.17.21",
-    "luxon": "3.0.1",
+    "luxon": "3.4.4",
     "prop-types": "15.8.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-scripts": "5.0.1",
     "tachyons": "4.12.0",
-    "zustand": "4.0.0-rc.1"
+    "zustand": "4.4.6"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "start": "vite",
+    "build": "vite build"
   },
-  "browserslist": [">1%", "not dead", "not ie <= 11", "not op_mini all"],
+  "browserslist": [
+    ">1%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react-swc": "^3.4.1",
+    "vite": "^4.5.0"
   }
 }

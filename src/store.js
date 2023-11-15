@@ -1,5 +1,5 @@
 import { get, has, merge, omit, set } from 'lodash-es'
-import create from 'zustand'
+import { create } from 'zustand'
 
 const SETTINGS_KEY = 'gtfo:settings'
 

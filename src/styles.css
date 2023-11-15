@@ -1,3 +1,5 @@
+@import 'tachyons';
+
 .progress {
   background: linear-gradient(to right, #0000 50%, #111 50%);
   background-size: 200% 100%;
