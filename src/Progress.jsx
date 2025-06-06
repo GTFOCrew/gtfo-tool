@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { format, londonNow, getProgressCSS } from './fn'
 
@@ -31,7 +31,7 @@ const styles = {
   `,
 }
 
-const Progress = ({ label, percent, from, to, underMsg, overMsg }) => {
+const Progress = ({ label = 'progress', percent = 0, from, to, underMsg = 'not started yet', overMsg = 'done ! ✨' }) => {
   const fPercentage = useMemo(() => {
     if (from && to) {
       const diff1 = londonNow().diff(from)
@@ -71,13 +71,6 @@ Progress.propTypes = {
   to: PropTypes.instanceOf(DateTime),
   underMsg: PropTypes.string,
   overMsg: PropTypes.string,
-}
-
-Progress.defaultProps = {
-  label: 'progress',
-  percent: 0,
-  underMsg: 'not started yet',
-  overMsg: 'done ! ✨',
 }
 
 export default Progress

@@ -9,12 +9,12 @@
   ],
   "dependencies": {
     "lodash-es": "4.17.21",
-    "luxon": "3.4.4",
+    "luxon": "^3.4.4",
     "prop-types": "15.8.1",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "tachyons": "4.12.0",
-    "zustand": "4.4.6"
+    "zustand": "^5.0.0"
   },
   "scripts": {
     "start": "vite",
@@ -27,10 +27,10 @@
     "not op_mini all"
   ],
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.0.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-react-swc": "^3.4.1",
-    "vite": "^4.5.0"
+    "@vitejs/plugin-react-swc": "^3.10.1",
+    "vite": "^6.0.0"
   }
 }

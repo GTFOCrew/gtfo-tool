@@ -4,7 +4,7 @@ import { DateTime } from 'luxon'
 
 const DOLLAR = 14
 
-const MAGIC_CARD = 7
+const MAGIC_CARD = 2
 
 const clamp = (n, min, max) => (n < min ? min : n > max ? max : n)
 
