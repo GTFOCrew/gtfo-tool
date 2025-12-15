@@ -7,7 +7,7 @@ const styles = {
   fixed
   flex items-center justify-center
   z-9999
-  w-100 h-100
+  w-50 h-50
   `,
   content: `
     bg-dark-gray pa3 br2
