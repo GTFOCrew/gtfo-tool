@@ -4,7 +4,7 @@ import { DateTime } from 'luxon'
 
 const DOLLAR = 14
 
-const MAGIC_CARD = 2
+const MAGIC_CARD = 1
 
 const clamp = (n, min, max) => (n < min ? min : n > max ? max : n)
 
@@ -68,33 +68,17 @@ export const getMoneyProgress = () => {
   return [current, prev]
 }
 
-const magicMonths = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 export const getMagicProgress = () => {
   const now = londonNow()
-  let nowAltered
-  const nextMonth = magicMonths.find((m) => now.month <= m)
-  if (nextMonth == null) {
-    nowAltered = now
-      .plus({ year: 1 })
-      .set({ month: magicMonths[0], day: MAGIC_CARD })
-  } else {
-    nowAltered = now.set({ month: nextMonth, day: MAGIC_CARD })
+  const current = now.set({ day: MAGIC_CARD});
+  
+  
+  if (now.day === MAGIC_CARD) {
+    return [current, current.plus({ month: -1 })];
   }
-  const current = getPayDayForMonth(nowAltered).plus({
-    day: MAGIC_CARD - DOLLAR,
-  })
-
-  if (now.month === current.month && now.day > current.day + 2) {
-    const next = getPayDayForMonth(nowAltered.plus({ months: 1 })).plus({
-      day: MAGIC_CARD - DOLLAR,
-    })
-    return [next, current.plus({ day: 3 + MAGIC_CARD - DOLLAR })]
-  }
-
-  const prev = getPayDayForMonth(nowAltered.minus({ month: 1 })).plus({
-    day: MAGIC_CARD - DOLLAR,
-  })
-  return [current, prev]
+  
+  const next = current.plus({month: 1});
+  return [next, current]
 }
 
 export const getProgressCSS = (percent) => `${clamp(100 - percent, 0, 100)}%`

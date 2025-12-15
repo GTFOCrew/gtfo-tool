@@ -8,6 +8,7 @@ import {
 } from './fn'
 import Progress from './Progress'
 import SettingsButton from './SettingsButton'
+import LaunchButton from './joderdroid/LaunchButton'
 import useSettings from './store'
 
 const styles = {
@@ -148,6 +149,7 @@ const Gtfo = () => {
       </div>
 
       <SettingsButton />
+      <LaunchButton />
     </section>
   )
 }
