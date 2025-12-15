@@ -11,7 +11,7 @@ const styles = {
   `,
   content: `
     bg-dark-gray pa3 br2
-    w-50 h-auto
+    w-100 h-auto
     flex flex-column items-center gap2
     mt2
     white
