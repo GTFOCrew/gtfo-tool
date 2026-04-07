@@ -1,33 +1,35 @@
 import { DateTime } from 'luxon'
 import { useMemo } from 'react'
 import PropTypes from 'prop-types'
-import { format, londonNow, getProgressCSS } from './fn'
+import { format, londonNow, getProgressCSS, tw } from './fn'
 
 const styles = {
-  back: `
-    gradient
-    w6 mw-90 h3
-    br-pill shadow-hover grow cursor
+  back: tw`
+    gradient shadow
+    w-lg mw-90 h-16
+    rounded-full cursor transition duration-300
+    hover:shadow-xl hover:scale-105
+    active:shadow-xs active:scale-95
   `,
 
-  main: `
-    w-100 h-100
-    progress br-pill
-    bg-near-black near-white
+  main: tw`
+    w-full h-full
+    progress rounded-full
     flex justify-center items-center
+    transition-all
   `,
 
-  label: `
-    tc f5
-    ph2 mb2
-    br2 shadow-2
-    bg-near-black near-white
+  label: tw`
+    text-center text-base
+    px-2 mb-2
+    rounded-sm shadow-md
+    bg-near-black text-near-white
   `,
 
-  data: `
-    ph2 pv1
-    br2 shadow-2
-    bg-near-white near-black
+  data: tw`
+    px-2 py-0.5
+    rounded-sm shadow-lg
+    bg-near-white text-near-black
   `,
 }
 

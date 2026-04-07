@@ -4,7 +4,7 @@
   "description": "the origins",
   "license": "MIT",
   "keywords": [
-    "tachyons",
+    "tailwindcss",
     "react"
   ],
   "dependencies": {
@@ -13,7 +13,7 @@
     "prop-types": "15.8.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "tachyons": "4.12.0",
+    "tailwindcss": "^4.2.2",
     "zustand": "^5.0.0"
   },
   "scripts": {
@@ -30,6 +30,7 @@
     "node": ">=24.0.0"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.2.2",
     "@vitejs/plugin-react": "^6.0.1",
     "vite": "^8.0.0"
   }

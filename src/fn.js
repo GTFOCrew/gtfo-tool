@@ -8,6 +8,8 @@ const MAGIC_CARD = 1
 
 const clamp = (n, min, max) => (n < min ? min : n > max ? max : n)
 
+export const tw = (s) => s
+
 export const londonNow = () => DateTime.local().setZone('Europe/London')
 
 const minutesToday = ({ start }) => {

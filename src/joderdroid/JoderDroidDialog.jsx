@@ -1,48 +1,50 @@
 import { useCallback, useState } from 'react'
 import bg from './joderdroid-icon-dark.png'
 import icon from './joderdroid-icon.png'
+import { tw } from '../fn'
 
 const styles = {
-  dialog: `
-  fixed
-  flex items-center justify-center
-  z-9999
-  w-50 h-50
+  dialog: tw`
+    fixed
+    flex items-center justify-center
+    z-9999
+    size-1/2
   `,
-  content: `
-    bg-dark-gray pa3 br2
-    w-100 h-auto
-    flex flex-column items-center gap2
-    mt2
-    white
+  content: tw`
+    bg-near-black text-near-white
+    p-4 mt-2 rounded-sm
+    w-full h-auto
+    flex flex-col items-center gap-9
   `,
-  backdrop: `
-    fixed top-0 left-0 w-100 h-100
-    bg-black-80
+  backdrop: tw`
+    fixed top-0 left-0 w-full h-full
+    bg-near-black/80 backdrop-blur-md
     z-999
   `,
-  input: `
-    flex flex-column items-center w-100
+  inputContainer: tw`
+    flex flex-col items-center w-full
   `,
-  output: `
-    w-100 mb1 h4
+  input: tw`
+    mb-1 px-1 py-0.5 rounded-sm
+    bg-near-white text-near-black
+  `,
+  output: tw`
+    w-full mb-1 h-32 px-1 py-0.5 rounded-sm
+    bg-near-white text-near-black
+    resize-y min-h-8 max-h-96
   `,
   
-  generateButton: `
-    bg-mid-gray
-    ph2 pv1
-    bn
-    shadow-1
+  generateButton: tw`
+    px-2 py-1
+    shadow hover:shadow-md active:shadow-xs
     cursor-pointer sel-none
-    grow
-    w3 h3
-    contain
+    size-16
+    bg-contain
+    transition duration-200 hover:scale-105 active:scale-95
   `,
 }
 
 const JoderDroidDialog = ({closeDialog}) => {
-
-  const [showDialog, setShowDialog] = useState(false)
   const [minSize, setMinSize] = useState(280)
   const [maxSize, setMaxSize] = useState(280)
   const [output, setOutput] = useState("")
@@ -77,28 +79,28 @@ const JoderDroidDialog = ({closeDialog}) => {
     <>
       <div className={styles.backdrop} onClick={toggleCloseDialog} />
       <div className={styles.dialog}>
-        <div className={styles.content} style={{ gap: '36px', backgroundImage: `url(${bg})` }}>
-          <div className={styles.input}>
-            <label>
+        <div className={styles.content} style={{ backgroundImage: `url(${bg})` }}>
+          <div className={styles.inputContainer}>
+            <label htmlFor="minSize">
               Min Size
             </label>
-            <input type="number" value={minSize} onChange={e => setMinSize(e.target.valueAsNumber)} min={'JODER'.length} />
+            <input className={styles.input} type="number" id="minSize" value={minSize} onChange={e => setMinSize(e.target.valueAsNumber)} min={'JODER'.length} />
           </div>
-          <div className={styles.input}>
-            <label>
-            Max Size
+          <div className={styles.inputContainer}>
+            <label htmlFor="maxSize">
+              Max Size
             </label>
-            <input type="number" value={maxSize} onChange={e => setMaxSize(e.target.valueAsNumber)} />
+            <input className={styles.input} type="number" id="maxSize" value={maxSize} onChange={e => setMaxSize(e.target.valueAsNumber)} />
           </div>
           
-          <div className={styles.input}>
-              <button className={styles.generateButton} style={{backgroundImage: `url(${icon})`}} onClick={generateOutput} />
+          <div className={styles.inputContainer}>
+            <button className={styles.generateButton} style={{backgroundImage: `url(${icon})`}} onClick={generateOutput} />
           </div>
-          <div className={styles.input}>
-            <label className={styles.label}>
+          <div className={styles.inputContainer}>
+            <label className={styles.label} htmlFor="output">
               Output
             </label>
-            <textarea className={styles.output} style={{ resize: 'vertical' }} value={output} readOnly />
+            <textarea className={styles.output} value={output} readOnly id="output" />
           </div>
         </div>
       </div>

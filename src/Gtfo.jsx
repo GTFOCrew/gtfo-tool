@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   getDayProgress,
   getWeekProgress,
   getMoneyProgress,
   getMagicProgress,
   isEarlyFriday,
+  tw,
 } from './fn'
 import Progress from './Progress'
 import SettingsButton from './SettingsButton'
@@ -12,30 +13,30 @@ import LaunchButton from './joderdroid/LaunchButton'
 import useSettings from './store'
 
 const styles = {
-  app: `
-    code fw6
+  app: tw`
+    font-code font-semibold
     sel-none
-    w-100 vh-100 pa3
-    bg-dark-gray bg-teams near-black
-    flex flex-column items-center justify-center
+    w-full h-dvh pa3
+    bg-teams text-near-white
+    flex flex-col items-center justify-center
   `,
 
-  header: `
-    mb4
+  header: tw`
+    mb-8
   `,
 
-  title: `
-    ph3 pv2
-    br2 link
-    f5 f4-ns
-    shadow-1
-    bg-yellow near-black
-    bg-animate hover-bg-near-black hover-yellow
+  title: tw`
+    px-4 py-2
+    rounded-sm
+    text-base sm:text-xl
+    shadow-md
+    bg-yellow-400 text-near-black
+    transition hover:bg-near-black hover:text-yellow-400
   `,
 
-  container: `
-    mv2 w-100
-    flex flex-column justify-center items-center
+  container: tw`
+    my-2 w-full
+    flex flex-col justify-center items-center
   `,
 }
 

@@ -1,23 +1,22 @@
 import { useCallback, useState } from 'react'
 import icon from './joderdroid-icon.png'
 import JoderDroidDialog from './JoderDroidDialog.jsx'
+import { tw } from '../fn.js'
 
 const styles = {
-  container: `
+  container: tw`
     flex flex-row items-center
-    mt2
-    white
+    mt-2
   `,
 
-  settingsButton: `
-    bg-mid-gray
-    ph2 pv1
-    bn br-pill
-    shadow-1
+  settingsButton: tw`
+    px-2 py-1
+    rounded-full
+    shadow-md hover:shadow-xl active:shadow-xs
     cursor-pointer sel-none
-    grow
-    w3 h3
-    contain
+    size-16
+    bg-center bg-contain
+    transition duration-200 hover:scale-105 active:scale-90
   `,
 
 }

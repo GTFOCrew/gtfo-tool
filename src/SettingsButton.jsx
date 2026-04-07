@@ -1,37 +1,40 @@
 import { useCallback, useState } from 'react'
 import useSettings from './store'
+import { tw } from './fn'
 
 const styles = {
-  container: `
+  container: tw`
     flex flex-row items-center
-    mt2
-    white
+    mt-2
   `,
 
-  settingsButton: `
-    bg-mid-gray
-    ph2 pv1
-    bn br-pill
-    shadow-1
+  settingsButton: tw`
+    bg-neutral-600 hover:bg-neutral-600/75
+    leading-tight
+    px-2 py-1
+    rounded-full
+    shadow hover:shadow-md
     cursor-pointer sel-none
-    grow
-  `,
-  settingsIcon: `
-    dib
-    white
+    transition duration-200
   `,
 
-  settingsPill: `
-    bg-mid-gray
-    ph2 pv1 ml2
-    bn br-pill
-    shadow-1
+  settingsIcon: tw`
+    inline-block size-5
+    text-near-white
+  `,
+
+  settingsPill: tw`
+    bg-neutral-600 text-near-white
+    px-2 py-1 ml-2
+    rounded-full
+    shadow hover:shadow-md
     sel-none
   `,
 
-  input: `
-    bn br2
-    f6
+  input: tw`
+    px-0.5
+    rounded-sm
+    text-sm bg-near-white text-near-black
   `,
 }
 
@@ -69,7 +72,7 @@ const SettingsButton = () => {
     return (
       <div className={styles.container}>
         <button className={styles.settingsButton} onClick={toggleShowSettings}>
-          <span className={styles.settingsIcon} style={{ width: 20 }}>
+          <span className={styles.settingsIcon}>
             &times;
           </span>
         </button>
@@ -129,8 +132,7 @@ const SettingsButton = () => {
         <span
           role="img"
           aria-label="Settings Icon"
-          className={styles.settingsIcon}
-          style={{ width: 20, marginLeft: -3 }}>
+          className={styles.settingsIcon}>
           ⚙️
         </span>
       </button>
