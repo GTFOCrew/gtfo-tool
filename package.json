@@ -8,7 +8,7 @@
     "react"
   ],
   "dependencies": {
-    "lodash-es": "4.17.21",
+    "lodash-es": "^4.18.0",
     "luxon": "^3.4.4",
     "prop-types": "15.8.1",
     "react": "^19.1.0",
@@ -27,10 +27,10 @@
     "not op_mini all"
   ],
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=24.0.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-react-swc": "^3.10.1",
-    "vite": "^6.0.0"
+    "@vitejs/plugin-react": "^6.0.1",
+    "vite": "^8.0.0"
   }
 }
